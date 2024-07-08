@@ -1,6 +1,7 @@
 FROM geopython/pygeoapi:latest
 
-FROM base AS no-cache-section
+ARG CACHEBUST
+RUN echo "$CACHEBUST"
 
 COPY sta.config.yml /pygeoapi/local.config.yml
 

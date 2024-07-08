@@ -18,8 +18,8 @@
       "ssn": "http://www.w3.org/ns/ssn/",
       "ssn-system":  "http://www.w3.org/ns/ssn/systems/"
     },
-    "___test":{{ data | to_json }},
-    "@id": "https://geoconnex.us/usgs/monitoring-location/08282300",
+    {# Does not seem to be the case that https://labs.waterdata.usgs.gov/sta/v1.1/Things('TX071-08161500')?$expand=Locations,Datastreams($expand=ObservedProperty,Sensor) has an @id property #}
+    "@id": "https://geoconnex.us/usgs/monitoring-location/'{{data['monitoringLocationNumber']}}'",
     "@type": [
       "hyf:HY_HydrometricFeature",
       "hyf:HY_HydroLocation",
@@ -32,9 +32,9 @@
     "identifier": {
       "@type": "PropertyValue",
       "propertyID": "USGS site number",
-      "value": "08282300"
+      "value": "{{data['monitoringLocationNumber']}}"
     },
-    "name": "Rio Brazos at Fishtail Road NR Tierra Amarilla, NM",
+    "name": "{{data['name']}}",
     "description": "Stream/River Site",
     "provider": {
       "url": "https://waterdata.usgs.gov",
@@ -43,14 +43,14 @@
     },
     "geo": {
       "@type": "schema:GeoCoordinates",
-      "longitude": -106.4707722,
-      "latitude": 36.7379333
+      "longitude": {{data['geometry']['coordinates'][0]}},
+      "latitude": {{data['geometry']['coordinates'][1]}}
     },
     "gsp:hasGeometry": {
       "@type": "http://www.opengis.net/ont/sf#Point",
       "gsp:asWKT": {
         "@type": "http://www.opengis.net/ont/geosparql#wktLiteral",
-        "@value": "POINT (-106.4707722 36.7379333)"
+        "@value": "POINT ({{data['geometry']['coordinates'][0]}} {{data['geometry']['coordinates'][1]}})"
       },
       "gsp:crs": {
         "@id": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
@@ -59,14 +59,14 @@
     "hyf:referencedPosition": {
       "hyf:HY_IndirectPosition": {
         "hyf:linearElement": {
-          "@id": "https://geoconnex.us/ref/mainstems/1611418"
+          "@id": "https://geoconnex.us/ref/mainstems/'{{data['monitoringLocationNumber']}}'"
         }
       }
     },
     "subjectOf": {
       "@type": "Dataset",
-      "name": "Discharge data from USGS Monitoring Location 08282300",
-      "description": "Discharge data from USGS Streamgage at Rio Brazos at Fishtail Road NR Tierra Amarilla, NM",
+      "name": "Discharge data from USGS Monitoring Location {{ data['name']}}",
+      "description": "Discharge data from USGS Streamgage at {{ data['monitoringLocationName']}}",
         "provider": {
       "url": "https://waterdata.usgs.gov",
       "@type": "GovernmentOrganization",
@@ -89,7 +89,7 @@
           "url": "https://doi.org/10.3133/tm3A8"
         }
       },
-      "temporalCoverage": "2014-06-30/..",
+      "temporalCoverage": "{{ data['Datastreams']['phenomenonTime']}}",
       "dc:accrualPeriodicity": "freq:daily",                                                               
       "dcat:temporalResolution": {"@value":"PT15M","@type":"xsd:duration"},  
       "distribution": [

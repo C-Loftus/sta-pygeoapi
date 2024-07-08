@@ -111,12 +111,11 @@ resources:
       - type: feature
         name: SensorThings
         data: https://labs.waterdata.usgs.gov/sta/v1.1/Things
-  
   # My custom addition
-  USGS/RioBrazos:
+  Exploration/Things:
     type: collection
-    title: USGS RioBrazos
-    description: United States Geological Survey SensorThings API for RioBrazos
+    title: Exploration for USGS Sensor Things code
+    description: United States Geological Survey (USGS.) SensorThings API for RioBrazos
     keywords:
       - Things
       - SensorThings
