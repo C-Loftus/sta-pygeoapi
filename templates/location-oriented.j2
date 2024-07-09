@@ -18,7 +18,6 @@
       "ssn": "http://www.w3.org/ns/ssn/",
       "ssn-system":  "http://www.w3.org/ns/ssn/systems/"
     },
-    {# Does not seem to be the case that https://labs.waterdata.usgs.gov/sta/v1.1/Things('TX071-08161500')?$expand=Locations,Datastreams($expand=ObservedProperty,Sensor) has an @id property #}
     "@id": "https://geoconnex.us/usgs/monitoring-location/'{{data['monitoringLocationNumber']}}'",
     "@type": [
       "hyf:HY_HydrometricFeature",
@@ -27,6 +26,7 @@
     ],
     "hyf:HydroLocationType": "hydrometric station",
     "sameAs": {
+      {# Was told do not worry about changing this for time being#}
       "@id": "https://geoconnex.us/ref/gages/1018463"
     },
     "identifier": {
