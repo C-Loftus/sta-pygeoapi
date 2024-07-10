@@ -111,6 +111,7 @@ resources:
       - type: feature
         name: SensorThings
         data: https://labs.waterdata.usgs.gov/sta/v1.1/Things
+        
   # My custom addition
   Exploration/Things:
     type: collection

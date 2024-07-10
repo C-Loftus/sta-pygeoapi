@@ -18,7 +18,8 @@
       "ssn": "http://www.w3.org/ns/ssn/",
       "ssn-system":  "http://www.w3.org/ns/ssn/systems/"
     },
-    "@id": "https://geoconnex.us/usgs/monitoring-location/'{{data['@id']}}'",
+    {# Don't do a null check here, we have to have this key #}
+    "@id": "{{data['@id']}}",
     "@type": [
       "hyf:HY_HydrometricFeature",
       "hyf:HY_HydroLocation",
@@ -26,62 +27,61 @@
     ],
     "hyf:HydroLocationType": "hydrometric station",
     "sameAs": {
-      {# Was told do not worry about changing this for time being#}
-      "@id": "https://geoconnex.us/ref/gages/1018463"
+      "@id": "https://geoconnex.us/ref/gages/{#Was told to not worry about changing this for time being, no way to get this without a geospatial query #}"
     },
     "identifier": {
       "@type": "PropertyValue",
       "propertyID": "USGS site number",
-      "value": "{{data['monitoringLocationNumber']}}"
+      {% if data['monitoringLocationNumber'] %}
+        "value": "{{data['monitoringLocationNumber']}}"
+      {% endif %}
     },
-    "name": "{{data['name']}}",
+    {% if data['name']%}
+     "name": "{{data['name']}}",
+    {% endif %}
     "description": "Stream/River Site",
+    {# We cannot get this info from the jsonld output, need to hard code it outselves #}
     "provider": {
       "url": "https://waterdata.usgs.gov",
       "@type": "GovernmentOrganization",
       "name": "U.S. Geological Survey Water Data for the Nation"
     },
-    "geo": {{ data['schema:geo'] | to_json | safe }}, 
+    {# Get the entire schema:geo json block #}
+    {% if data['schema:geo']%}
+    "geo": {{ data['schema:geo'] | to_json }}, 
+    {% endif %}
 
-    "gsp:hasGeometry": {{ data['gsp:hasGeometry'] | to_json | safe }},     
-
-    {# 
-        "gsp:hasGeometry": {
-          "@type": "http://www.opengis.net/ont/sf#Point",
-          "gsp:asWKT": {
-            "@type": "http://www.opengis.net/ont/geosparql#wktLiteral",
-            "@value": "POINT ({{data['geometry']['coordinates'][0]}} {{data['geometry']['coordinates'][1]}})"
-          },
-
-          # This is not in the jsonld block for gsp:hasGeometry, is this not needed?
-          # Potentially not required? Add it in after the fact
-          # Ben said might add this to pygeoapi since it isn't returned
-          # in the json block
-
+    {# If we had everything in the template we could just do this:
+    "gsp:hasGeometry": {{ data['gsp:hasGeometry'] | to_json }},     
+    #}
+    {% if data['gsp:hasGeometry'] %}
+   "gsp:hasGeometry": {
+          "@type": "{{ data['gsp:hasGeometry']['@type'] }}", 
+          "gsp:asWKT": {{ data['gsp:hasGeometry']['gsp:asWKT'] | to_json }},
+          {# Have to hard code this here, it is the one thing not returned in the gps:hasGeometry block in the original jsonld template #}
           "gsp:crs": {
             "@id": "http://www.opengis.net/def/crs/OGC/1.3/CRS84"
           }
-        },
-
-
-    #}
-
+    },
+    {% endif %}
 
     "hyf:referencedPosition": {
       "hyf:HY_IndirectPosition": {
-        {# We can't get this infowithout a geospatial query 
          "hyf:linearElement": {
-
-          "@id": "https://geoconnex.us/ref/mainstems/{{data['monitoringLocationNumber']}}"
-        } #}
+          "@id": "https://geoconnex.us/ref/mainstems/{# We can't get this info without a geospatial query  #}"
+        }
       }
     },
 
 
     "subjectOf": {
       "@type": "Dataset",
+      {% if data['name']%}
       "name": "Discharge data from USGS Monitoring Location {{ data['name']}}",
+      {% endif %}
+      {% if data['monitoringLocationName']%}
       "description": "Discharge data from USGS Streamgage at {{ data['monitoringLocationName']}}",
+      {% endif %}
         "provider": {
       "url": "https://waterdata.usgs.gov",
       "@type": "GovernmentOrganization",
@@ -105,7 +105,9 @@
         }
       },
       {# There are multiple phenomenon time, but they are the same so we can just pick either#}
-      "temporalCoverage": "{{ data['Datastreams'][0]['observedArea']['phenomenonTime']}}",
+      {# Could null check each part of the query all the way down as well for complete coverage#}
+      {% if data['Datastreams'][0] is defined and data['Datastreams'][0]['observedArea']['phenomenonTime'] %}      "temporalCoverage": "{{ data['Datastreams'][0]['observedArea']['phenomenonTime']}}",
+      {% endif %}
       "dc:accrualPeriodicity": "freq:daily",                                                               
       "dcat:temporalResolution": {"@value":"PT15M","@type":"xsd:duration"},  
       "distribution": [
