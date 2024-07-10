@@ -1,4 +1,8 @@
 
+# Story Summary
+
+A new location-oriented template that be ingested by pygeoapi [can be found here](./templates/location-oriented.j2). I modified the `sta.config.yml` to use it 
+
 To test:
 
 Run `docker compose up` then examine the json output at:
