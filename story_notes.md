@@ -48,7 +48,6 @@ Run `docker compose up` then examine the json output at:
         "value":"331856091114601"
     },
     "name":"AR008-331856091114601",
-    "description":"Stream/River Site",
     "provider":{
         "url":"https://waterdata.usgs.gov",
         "@type":"GovernmentOrganization",
@@ -76,60 +75,113 @@ Run `docker compose up` then examine the json output at:
             }
         }
     },
-    "subjectOf":{
-        "@type":"Dataset",
-        "name":"Discharge data from USGS Monitoring Location AR008-331856091114601",
-        "description":"Discharge data from USGS Streamgage at 16S01W10CC1 CH-32 WU",
-        "provider":{
-            "url":"https://waterdata.usgs.gov",
-            "@type":"GovernmentOrganization",
-            "name":"U.S. Geological Survey Water Data for the Nation"
-        },
-        "url":"https://waterdata.usgs.gov/monitoring-location/08282300/#parameterCode=00060",
-        "variableMeasured":{
-            "@type":"PropertyValue",
-            "name":"discharge",
-            "description":"Discharge in cubic feet per second",
-            "propertyID":"https://www.wikidata.org/wiki/Q8737769",
-            "url":"https://en.wikipedia.org/wiki/Discharge_(hydrology)",
-            "unitText":"cubic feet per second",
-            "qudt:hasQuantityKind":"qudt-quantkinds:VolumeFlowRate",
-            "unitCode":"qudt-units:FT3-PER-SEC",
-            "measurementTechnique":"observation",
-            "measurementMethod":{
-                "name":"Discharge Measurements at Gaging Stations",
-                "publisher":"U.S. Geological Survey",
-                "url":"https://doi.org/10.3133/tm3A8"
-            }
-        },
-        "dc:accrualPeriodicity":"freq:daily",
-        "dcat:temporalResolution":{
-            "@value":"PT15M",
-            "@type":"xsd:duration"
-        },
-        "distribution":[
-            {
-                "@type":"DataDownload",
-                "name":"USGS Instantaneous Values Service",
-                "contentUrl":"https://waterservices.usgs.gov/nwis/iv/?sites=08282300&parameterCd=00060&format=rdb",
-                "encodingFormat":[
-                    "text/tab-separated-values"
-                ],
-                "dc:conformsTo":"https://pubs.usgs.gov/of/2003/ofr03123/6.4rdb_format.pdf"
+    "subjectOf":[
+        {
+            "@type":"Dataset",
+            "name":"Flow rate data from USGS Monitoring Location AR008-331856091114601",
+            "description":"Flow rate, well / AR008-331856091114601-177000bd9f6c45e5909c1729e4aab7b0",
+            "provider":{
+                "url":"https://waterdata.usgs.gov",
+                "@type":"GovernmentOrganization",
+                "name":"U.S. Geological Survey Water Data for the Nation"
             },
-            {
-                "@type":"DataDownload",
-                "name":"USGS SensorThings API",
-                "contentUrl":"https://labs.waterdata.usgs.gov/sta/v1.1/Datastreams('0adb31f7852e4e1c9a778a85076ac0cf')?$expand=Thing,Observations",
-                "encodingFormat":[
-                    "application/json"
-                ],
-                "dc:conformsTo":"https://labs.waterdata.usgs.gov/docs/sensorthings/index.html"
-            }
-        ]
-    }
+            "url":"https://waterdata.usgs.gov/monitoring-location/08282300/#parameterCode=00060",
+            "variableMeasured":{
+                "@type":"PropertyValue",
+                "name":"Flow rate",
+                "description":"Flow rate in US Gal/min",
+                "propertyID":"https://www.wikidata.org/wiki/Q8737769",
+                "url":"https://en.wikipedia.org/w/index.php?search=Flow rate",
+                "unitText":"US Gal/min",
+                "qudt:hasQuantityKind":"qudt-quantkinds:VolumeFlowRate",
+                "unitCode":"qudt-units:FT3-PER-SEC",
+                "measurementTechnique":"observation",
+                "measurementMethod":{
+                    "name":"Flow rate Measurements at Gaging Stations",
+                    "publisher":"U.S. Geological Survey",
+                    "url":"https://doi.org/10.3133/tm3A8"
+                }
+            },
+            "dc:accrualPeriodicity":"freq:daily",
+            "dcat:temporalResolution":{
+                "@value":"PT15M",
+                "@type":"xsd:duration"
+            },
+            "distribution":[
+                {
+                    "@type":"DataDownload",
+                    "name":"USGS Instantaneous Values Service",
+                    "contentUrl":"https://waterservices.usgs.gov/nwis/iv/?sites=177000bd9f6c45e5909c1729e4aab7b0&parameterCd=00060&format=rdb",
+                    "encodingFormat":[
+                        "text/tab-separated-values"
+                    ],
+                    "dc:conformsTo":"https://pubs.usgs.gov/of/2003/ofr03123/6.4rdb_format.pdf"
+                },
+                {
+                    "@type":"DataDownload",
+                    "name":"USGS SensorThings API",
+                    "contentUrl":"https://labs.waterdata.usgs.gov/sta/v1.1/Datastreams('177000bd9f6c45e5909c1729e4aab7b0')?$expand=Thing,Observations",
+                    "encodingFormat":[
+                        "application/json"
+                    ],
+                    "dc:conformsTo":"https://labs.waterdata.usgs.gov/docs/sensorthings/index.html"
+                }
+            ]
+        },
+        {
+            "@type":"Dataset",
+            "name":"Flow rate data from USGS Monitoring Location AR008-331856091114601",
+            "description":"Precipitation, total, inches / AR008-331856091114601-9aa77f35cea344a4a0e5715e05d057c3",
+            "provider":{
+                "url":"https://waterdata.usgs.gov",
+                "@type":"GovernmentOrganization",
+                "name":"U.S. Geological Survey Water Data for the Nation"
+            },
+            "url":"https://waterdata.usgs.gov/monitoring-location/08282300/#parameterCode=00060",
+            "variableMeasured":{
+                "@type":"PropertyValue",
+                "name":"Precipitation",
+                "description":"Precipitation in in",
+                "propertyID":"https://www.wikidata.org/wiki/Q8737769",
+                "url":"https://en.wikipedia.org/w/index.php?search=Precipitation",
+                "unitText":"in",
+                "qudt:hasQuantityKind":"qudt-quantkinds:VolumeFlowRate",
+                "unitCode":"qudt-units:FT3-PER-SEC",
+                "measurementTechnique":"observation",
+                "measurementMethod":{
+                    "name":"Precipitation Measurements at Gaging Stations",
+                    "publisher":"U.S. Geological Survey",
+                    "url":"https://doi.org/10.3133/tm3A8"
+                }
+            },
+            "dc:accrualPeriodicity":"freq:daily",
+            "dcat:temporalResolution":{
+                "@value":"PT15M",
+                "@type":"xsd:duration"
+            },
+            "distribution":[
+                {
+                    "@type":"DataDownload",
+                    "name":"USGS Instantaneous Values Service",
+                    "contentUrl":"https://waterservices.usgs.gov/nwis/iv/?sites=9aa77f35cea344a4a0e5715e05d057c3&parameterCd=00060&format=rdb",
+                    "encodingFormat":[
+                        "text/tab-separated-values"
+                    ],
+                    "dc:conformsTo":"https://pubs.usgs.gov/of/2003/ofr03123/6.4rdb_format.pdf"
+                },
+                {
+                    "@type":"DataDownload",
+                    "name":"USGS SensorThings API",
+                    "contentUrl":"https://labs.waterdata.usgs.gov/sta/v1.1/Datastreams('9aa77f35cea344a4a0e5715e05d057c3')?$expand=Thing,Observations",
+                    "encodingFormat":[
+                        "application/json"
+                    ],
+                    "dc:conformsTo":"https://labs.waterdata.usgs.gov/docs/sensorthings/index.html"
+                }
+            ]
+        }
+    ]
 }
-
 ```
 
 
