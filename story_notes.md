@@ -85,12 +85,12 @@ Run `docker compose up` then examine the json output at:
                 "@type":"GovernmentOrganization",
                 "name":"U.S. Geological Survey Water Data for the Nation"
             },
-            "url":"https://waterdata.usgs.gov/monitoring-location/08282300/#parameterCode=00060",
+            "url":"https://waterdata.usgs.gov/monitoring-location/08282300/#parameterCode=00058",
             "variableMeasured":{
                 "@type":"PropertyValue",
                 "name":"Flow rate",
                 "description":"Flow rate in US Gal/min",
-                "propertyID":"https://www.wikidata.org/wiki/Q8737769",
+                "propertyID":"https://www.wikidata.org/w/index.php?search=Flow rate",
                 "url":"https://en.wikipedia.org/w/index.php?search=Flow rate",
                 "unitText":"US Gal/min",
                 "qudt:hasQuantityKind":"qudt-quantkinds:VolumeFlowRate",
@@ -111,7 +111,7 @@ Run `docker compose up` then examine the json output at:
                 {
                     "@type":"DataDownload",
                     "name":"USGS Instantaneous Values Service",
-                    "contentUrl":"https://waterservices.usgs.gov/nwis/iv/?sites=177000bd9f6c45e5909c1729e4aab7b0&parameterCd=00060&format=rdb",
+                    "contentUrl":"https://waterservices.usgs.gov/nwis/iv/?sites=AR008:331856091114601&parameterCd=00058&format=rdb",
                     "encodingFormat":[
                         "text/tab-separated-values"
                     ],
@@ -137,12 +137,12 @@ Run `docker compose up` then examine the json output at:
                 "@type":"GovernmentOrganization",
                 "name":"U.S. Geological Survey Water Data for the Nation"
             },
-            "url":"https://waterdata.usgs.gov/monitoring-location/08282300/#parameterCode=00060",
+            "url":"https://waterdata.usgs.gov/monitoring-location/08282300/#parameterCode=00045",
             "variableMeasured":{
                 "@type":"PropertyValue",
                 "name":"Precipitation",
                 "description":"Precipitation in in",
-                "propertyID":"https://www.wikidata.org/wiki/Q8737769",
+                "propertyID":"https://www.wikidata.org/w/index.php?search=Precipitation",
                 "url":"https://en.wikipedia.org/w/index.php?search=Precipitation",
                 "unitText":"in",
                 "qudt:hasQuantityKind":"qudt-quantkinds:VolumeFlowRate",
@@ -163,7 +163,7 @@ Run `docker compose up` then examine the json output at:
                 {
                     "@type":"DataDownload",
                     "name":"USGS Instantaneous Values Service",
-                    "contentUrl":"https://waterservices.usgs.gov/nwis/iv/?sites=9aa77f35cea344a4a0e5715e05d057c3&parameterCd=00060&format=rdb",
+                    "contentUrl":"https://waterservices.usgs.gov/nwis/iv/?sites=AR008:331856091114601&parameterCd=00045&format=rdb",
                     "encodingFormat":[
                         "text/tab-separated-values"
                     ],
@@ -188,6 +188,7 @@ Run `docker compose up` then examine the json output at:
 ## Raw jsonld output before template
 
 ```json
+
 {
     "@context":[
         {
@@ -236,7 +237,7 @@ Run `docker compose up` then examine the json output at:
                     33.3169611
                 ]
             },
-            "phenomenonTime":"2024-06-30T09:15:00Z/2024-07-10T22:00:00Z",
+            "phenomenonTime":"2024-07-06T09:15:00Z/2024-07-16T14:00:00Z",
             "properties":{
                 "Thresholds":[
                     {
@@ -290,7 +291,7 @@ Run `docker compose up` then examine the json output at:
                     33.3169611
                 ]
             },
-            "phenomenonTime":"2024-06-30T09:15:00Z/2024-07-10T22:00:00Z",
+            "phenomenonTime":"2024-07-06T09:15:00Z/2024-07-16T14:00:00Z",
             "properties":{
                 "ParameterCode":"00045"
             }
@@ -376,7 +377,6 @@ Run `docker compose up` then examine the json output at:
         }
     ]
 }
-
 ```
 
 ## Notes

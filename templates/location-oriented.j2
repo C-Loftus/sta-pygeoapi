@@ -91,7 +91,7 @@
               "name": "U.S. Geological Survey Water Data for the Nation"
             },
 
-            "url": "https://waterdata.usgs.gov/monitoring-location/08282300/#parameterCode=00060",
+            "url": "https://waterdata.usgs.gov/monitoring-location/08282300/#parameterCode={{ stream["properties"]["ParameterCode"] }}",
            {# Assume here it is discharge, but ideally we would get this variable #}
             "variableMeasured": {
               "@type": "PropertyValue",
@@ -101,7 +101,7 @@
               "description": "{{ typeOfData }} in {{ stream['unitOfMeasurement']['symbol'] }}",
               {% endif %}
 
-              "propertyID": "https://www.wikidata.org/wiki/Q8737769",
+              "propertyID": "https://www.wikidata.org/w/index.php?search={{ typeOfData }}",
 
               {# 
               If there are many types of data, we have to just search since we can't be confident
@@ -125,7 +125,6 @@
                 "name": "{{ typeOfData }} Measurements at Gaging Stations",
                 "publisher": "U.S. Geological Survey",
                 "url": "https://doi.org/10.3133/tm3A8"
-
               }
             },
             {% if stream['observedArea'] is defined and stream['observedArea']['phenomenonTime'] %}
@@ -140,12 +139,9 @@
                 "@type": "DataDownload",
                 "name": "USGS Instantaneous Values Service",
 
-                {# 
-                Unclear what goes in the contentUrl: 
-                name, id, stream[name], stream[@iot.id], hydrologicUnit, or
-                 any other number string present in the jsonld doesn't seem to work 
-                #}
-                "contentUrl": "https://waterservices.usgs.gov/nwis/iv/?sites={{stream['@iot.id']}}&parameterCd=00060&format=rdb",
+                {#`sites` is the same as the Thing id but the hyphen is replaced by a colon. if there is no hyphen, then you just pipe in the thing id  #}
+                {# We then need to remove the surrounding '' to make sure the query is properly formatted #}
+                "contentUrl": "https://waterservices.usgs.gov/nwis/iv/?sites={{data['id'] | replace("-", ":" ) | replace("'", "")}}&parameterCd={{ stream["properties"]["ParameterCode"] }}&format=rdb",
                 "encodingFormat": [
                   "text/tab-separated-values"
                 ],
