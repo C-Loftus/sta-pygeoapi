@@ -59,13 +59,18 @@
         }
       },
     {% endif %}
+
+    {# Since @id is the only key in this block, I am assuming we can just exclude the entire block if it doesn't exist since the block would not provide any info #}
+    {% if data["Locations"][0]["properties"] is defined and data["Locations"][0]["properties"]["mainstemURL"] %}
     "hyf:referencedPosition": {
       "hyf:HY_IndirectPosition": {
          "hyf:linearElement": {
-          "@id": "https://geoconnex.us/ref/mainstems/{# We can't get this info without a geospatial query  #}"
+          "@id": "https://geoconnex.us/ref/mainstems/{{ data['Locations'][0]['properties']['mainstemURL'] }}"
         }
       }
     },
+    {% endif %}
+
     "subjectOf": [
       {% for stream in data['Datastreams'] %}
           {
